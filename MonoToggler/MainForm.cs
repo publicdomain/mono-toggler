@@ -75,120 +75,147 @@ namespace MonoToggler
         }
 
         /// <summary>
-        /// Ons the new tool strip menu item1 click.
+        /// Handles the new tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        private void OnNewToolStripMenuItem1Click(object sender, EventArgs e)
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Ask user
+            if (MessageBox.Show("Reset settings data?", "New", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                // Delete settings data
+                File.Delete(this.settingsDataPath);
+
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+
+                // Load settings from disk
+                this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+                // Set topmost
+                this.settingsData.AlwaysOnTop = this.alwaysOnTopToolStripMenuItem.Checked;
+
+                // Reset toggle count
+                this.toggleCount = 0;
+
+                // Update toggle count
+                this.togglesCountToolStripStatusLabel.Text = this.toggleCount.ToString();
+            }
         }
 
         /// <summary>
-        /// Ons the free releases public domainis tool strip menu item click.
+        /// Handles the free releases public domainis tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnFreeReleasesPublicDomainisToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the original thread donation codercom tool strip menu item click.
+        /// Handles the original thread donation codercom tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnOriginalThreadDonationCodercomToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the source code githubcom tool strip menu item click.
+        /// Handles the source code githubcom tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the about tool strip menu item click.
+        /// Handles the about tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the options tool strip menu item drop down item clicked.
+        /// Handles the options tool strip menu item drop down item clicked.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnOptionsToolStripMenuItemDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            // TODO Add code
+            // Set tool strip menu item
+            ToolStripMenuItem toolStripMenuItem = (ToolStripMenuItem)e.ClickedItem;
+
+            // Toggle checked
+            toolStripMenuItem.Checked = !toolStripMenuItem.Checked;
+
+            // Set topmost by check box
+            this.TopMost = this.alwaysOnTopToolStripMenuItem.Checked;
         }
 
         /// <summary>
-        /// Ons the mono toggler check box checked changed.
+        /// Handles the mono toggler check box checked changed.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnMonoTogglerCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the main form load.
+        /// Handles the main form load.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the main form form closing.
+        /// Handles the main form form closing.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnMainFormFormClosing(object sender, FormClosingEventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the enable command tool strip menu item click.
+        /// Handles the enable command tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnEnableCommandToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the disable command tool strip menu item click.
+        /// Handles the disable command tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnDisableCommandToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
         }
 
         /// <summary>
-        /// Ons the refresh tool strip menu item click.
+        /// Handles the refresh tool strip menu item click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)
         {
             // TODO Add code
@@ -323,10 +350,10 @@ namespace MonoToggler
 
 
         /// <summary>
-        /// Ons the exit tool strip menu item1 click.
+        /// Handles the exit tool strip menu item1 click.
         /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
         private void OnExitToolStripMenuItem1Click(object sender, EventArgs e)
         {
             // TODO Add code
