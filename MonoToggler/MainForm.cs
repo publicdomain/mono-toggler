@@ -289,6 +289,40 @@ namespace MonoToggler
         }
 
         /// <summary>
+        /// Disables the mono.
+        /// </summary>
+        private void DisableMono()
+        {
+            try
+            {
+                // Open registry key
+                using (RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Multimedia\Audio", true))
+                {
+                    // Set value 
+                    registryKey.SetValue("AccessibilityMonoMixState", 0, RegistryValueKind.DWord);
+
+                    // Restart audio
+                    this.RestartAudio();
+
+                    // Change text
+                    this.monoTogglerCheckBox.Text = "Stereo";
+                }
+
+                // Raise toggle count
+                this.toggleCount++;
+
+                // Update toggle count
+                this.togglesCountToolStripStatusLabel.Text = this.toggleCount.ToString();
+            }
+            catch (Exception ex)
+            {
+                // Advise user
+                MessageBox.Show($"Error when disabling:{Environment.NewLine}{Environment.NewLine}{ex.Message}", "Disable mono", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        /// <summary>
         /// Ons the exit tool strip menu item1 click.
         /// </summary>
         /// <param name="sender">Sender.</param>
