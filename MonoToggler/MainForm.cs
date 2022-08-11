@@ -188,7 +188,29 @@ namespace MonoToggler
         /// <param name="e">Event arguments.</param>
         private void OnMainFormLoad(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set topmost values
+            this.alwaysOnTopToolStripMenuItem.Checked = this.settingsData.AlwaysOnTop;
+            this.TopMost = this.settingsData.AlwaysOnTop;
+
+            // Open registry key
+            using (RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Multimedia\Audio", true))
+            {
+                // Check for value
+                if (registryKey.GetValue("AccessibilityMonoMixState") == null)
+                {
+                    // Set default value 
+                    registryKey.SetValue("AccessibilityMonoMixState", 0, RegistryValueKind.DWord);
+                }
+                else
+                {
+                    // Check for mono value
+                    if ((int)registryKey.GetValue("AccessibilityMonoMixState") == 1)
+                    {
+                        // Change text
+                        this.monoTogglerCheckBox.Text = "Mono";
+                    }
+                }
+            }
         }
 
         /// <summary>
