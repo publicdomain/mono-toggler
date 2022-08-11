@@ -238,6 +238,23 @@ namespace MonoToggler
             }
         }
 
+        /// <summary>
+        /// Restarts the audio.
+        /// </summary>
+        private void RestartAudio()
+        {
+            // Set service controller
+            ServiceController serviceController = new ServiceController
+            {
+                MachineName = ".",
+                ServiceName = "Audiosrv"
+            };
+
+            // Restart the service
+            serviceController.Stop();
+            serviceController.Start();
+        }
+
 
         /// <summary>
         /// Ons the exit tool strip menu item1 click.
