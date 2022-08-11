@@ -225,33 +225,27 @@ namespace MonoToggler
         }
 
         /// <summary>
-        /// Handles the enable command tool strip menu item click.
-        /// </summary>
-        /// <param name="sender">Sender object.</param>
-        /// <param name="e">Event arguments.</param>
-        private void OnEnableCommandToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            // TODO Add code
-        }
-
-        /// <summary>
-        /// Handles the disable command tool strip menu item click.
-        /// </summary>
-        /// <param name="sender">Sender object.</param>
-        /// <param name="e">Event arguments.</param>
-        private void OnDisableCommandToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            // TODO Add code
-        }
-
-        /// <summary>
         /// Handles the refresh tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open registry key
+            using (RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Multimedia\Audio", true))
+            {
+                // Check for mono value
+                if ((int)registryKey.GetValue("AccessibilityMonoMixState") == 1)
+                {
+                    // Set check box for it to trigger enabling
+                    this.monoTogglerCheckBox.Checked = true;
+                }
+                else
+                {
+                    // Set check box for it to trigger disabling
+                    this.monoTogglerCheckBox.Checked = false;
+                }
+            }
         }
 
         /// <summary>
