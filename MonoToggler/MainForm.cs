@@ -168,7 +168,17 @@ namespace MonoToggler
         /// <param name="e">Event arguments.</param>
         private void OnMonoTogglerCheckBoxCheckedChanged(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Check status
+            if (this.monoTogglerCheckBox.Checked)
+            {
+                // Enable
+                this.EnableMono();
+            }
+            else
+            {
+                // Disable
+                this.DisableMono();
+            }
         }
 
         /// <summary>
