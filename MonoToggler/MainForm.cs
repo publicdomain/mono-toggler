@@ -300,16 +300,28 @@ namespace MonoToggler
         /// </summary>
         private void RestartAudio()
         {
-            // Set service controller
-            ServiceController serviceController = new ServiceController
+            try
             {
-                MachineName = ".",
-                ServiceName = "Audiosrv"
-            };
+                // Update with status (count ypdate with change it again)
+                this.togglesCountToolStripStatusLabel.Text = "Toggling...";
 
-            // Restart the service
-            serviceController.Stop();
-            serviceController.Start();
+                // Set service controller
+                ServiceController serviceController = new ServiceController("Audiosrv");
+
+                // Restart service
+                if ((serviceController.Status.Equals(ServiceControllerStatus.Running)) || (serviceController.Status.Equals(ServiceControllerStatus.StartPending)))
+                {
+                    serviceController.Stop();
+                }
+                serviceController.WaitForStatus(ServiceControllerStatus.Stopped);
+                serviceController.Start();
+                serviceController.WaitForStatus(ServiceControllerStatus.Running);
+            }
+            catch (Exception ex)
+            {
+                // Advise user
+                MessageBox.Show($"Service restart error:{Environment.NewLine}{Environment.NewLine}{ex.Message}", "Audiosrv", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
