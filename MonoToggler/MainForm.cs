@@ -210,7 +210,7 @@ namespace MonoToggler
                     if ((int)registryKey.GetValue("AccessibilityMonoMixState") == 1)
                     {
                         // Change text
-                        this.monoTogglerCheckBox.Text = "Mono";
+                        this.monoTogglerCheckBox.Text = "MONO press to stereo";
                     }
                 }
             }
@@ -341,7 +341,7 @@ namespace MonoToggler
                     this.RestartAudio();
 
                     // Change text
-                    this.monoTogglerCheckBox.Text = "Mono";
+                    this.monoTogglerCheckBox.Text = "MONO press to stereo";
                 }
 
                 // Raise toggle count
@@ -374,7 +374,7 @@ namespace MonoToggler
                     this.RestartAudio();
 
                     // Change text
-                    this.monoTogglerCheckBox.Text = "Stereo";
+                    this.monoTogglerCheckBox.Text = "STEREO press to mono";
                 }
 
                 // Raise toggle count
